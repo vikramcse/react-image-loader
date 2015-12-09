@@ -1,8 +1,28 @@
 
 var TextForm = React.createClass({
+	getInitialState: function() {
+		return {
+			url: ''
+		};
+	},
+	updateUrl: function() {
+		var urlFromTextBox = this.refs.url.value;
+		this.setState({
+			url: urlFromTextBox
+		});
+	},
 	render: function() {
 		return(
-			<div>Form</div>
+			<div>
+				<input
+					width={this.state.width}
+					height={this.state.height} 
+					onChange={this.updateUrl}
+					ref="url"
+					type="text"/> <br/><br/>
+
+				<Image url={this.state.url}/>
+			</div>
 		);
 	}
 });
@@ -10,7 +30,9 @@ var TextForm = React.createClass({
 var Image = React.createClass({
 	render: function() {
 		return(
-			<div>Image</div>
+			<div>
+				<img src={this.props.url}/>
+			</div>
 		);
 	}
 });
@@ -20,9 +42,9 @@ var App = React.createClass({
 		return(
 			<div>
 				<TextForm/>
-				<Image/>
 			</div>
 		);
 	}
 });
+
 ReactDOM.render(<App/>, document.getElementById('content'));
